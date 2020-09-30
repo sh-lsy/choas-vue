@@ -49,8 +49,9 @@
         </div>
       </div>
       <div class="selected-box">
-        <div :class="getTreeFootBoxClass">
-          已选{{filterDirtySelectedDataByCondition.length}}项
+        <div :class="{getTreeFootBoxClass,showStyle:filterDirtySelectedDataByCondition.length}">
+          已选<span style="color:#1890ff">{{filterDirtySelectedDataByCondition.length}}</span>项 
+          <span v-if="getScore">已选<span style="color:#1890ff">{{ getScore }}</span>分</span>
         </div>
         <div class="selected-content">
           <p v-for="item of filterDirtySelectedDataByCondition"
@@ -180,6 +181,14 @@
       }
     },
     computed: {
+      getScore() {
+        let score = 0
+        for (let index = 0; index < this.filterDirtySelectedDataByCondition.length; index++) {
+          score += this.filterDirtySelectedDataByCondition[index].score
+          
+        }
+        return score
+      },
       filterDirtySelectedDataByCondition() {
         return this.dirtySelectedData.filter(item => !item[this.conditionProps])
       },
@@ -296,7 +305,12 @@
   @import '../scss/variable';
   @import '../scss/size';
   @import '../scss/functions';
-
+  .showStyle{
+    font-size:20px;
+    color:#000;
+    margin-top:30px;
+    text-align: right;
+  }
   .modal-header {
     width: 100%;
     height: 50px;
