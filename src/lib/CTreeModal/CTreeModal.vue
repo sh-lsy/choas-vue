@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="selected-box">
-        <div :class="{getTreeFootBoxClass,showStyle:filterDirtySelectedDataByCondition.length}">
+        <div v-if="multiple" :class="{getTreeFootBoxClass,showStyle:filterDirtySelectedDataByCondition.length}">
           已选<span style="color:#1890ff">{{filterDirtySelectedDataByCondition.length}}</span>项 
           <span v-if="getScore">已选<span style="color:#1890ff">{{ getScore }}</span>分</span>
         </div>
