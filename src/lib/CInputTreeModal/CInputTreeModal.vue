@@ -23,13 +23,15 @@
                                 @close="(e)=>listChangeHandle(item, e)"
                                 active-color="#ff5e5c"
                           >
-                          {{ item[[reflectKey['key']]] }}
+                          {{ item[[reflectKey['key']]] }}11
                           </CTag>
                       </template>
                       <template v-if="filterDirtySelectedDataByCondition.length && !multiple">
                           <CTag v-for="(item, index) of filterDirtySelectedDataByCondition"
                                 :key="index + item[reflectKey['value']]"
                                 size="small"
+                                @close="(e)=>listChangeHandle(item, e)"
+                                active-color="#ff5e5c"
                           >
                           {{ item[[reflectKey['key']]] }}
                           </CTag>
@@ -216,10 +218,11 @@
         this.$emit('addTreeNode', v)
       },
       listChangeHandle(itemData, $event) {
+        console.log(itemData)
         treeSelectListChangeHandle(this, itemData);
         $event.stopPropagation();
         $event.preventDefault();
-      },
+      }
     },
     watch: {
       listData: {
