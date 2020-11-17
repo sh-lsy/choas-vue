@@ -218,7 +218,6 @@
         this.$emit('addTreeNode', v)
       },
       listChangeHandle(itemData, $event) {
-        console.log(itemData)
         treeSelectListChangeHandle(this, itemData);
         $event.stopPropagation();
         $event.preventDefault();
