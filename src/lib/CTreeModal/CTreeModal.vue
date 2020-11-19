@@ -229,11 +229,13 @@
         this.$set(this, 'markDownListData', v);
       },
       confirmHandle() {
-        this.$emit('toggleShow', false);
+        // 
+        this.searchStr = '';
         this.$emit('input', removeDirtyKey(this.filterDirtySelectedDataByCondition, treeDirtyKeys));
         this.$emit('getDirtySelectedData', this.dirtySelectedData);
         this.$emit('getMarkDownListData', this.markDownListData);
         this.$set(this, 'backUpListData', _.cloneDeep(this.markDownListData));
+        this.$emit('toggleShow', false);
       },
       cancelHandle() {
         this.$emit('toggleShow', false);

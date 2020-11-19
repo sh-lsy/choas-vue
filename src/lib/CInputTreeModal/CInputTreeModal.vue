@@ -23,7 +23,7 @@
                                 @close="(e)=>listChangeHandle(item, e)"
                                 active-color="#ff5e5c"
                           >
-                          {{ item[[reflectKey['key']]] }}11
+                          {{ item[[reflectKey['key']]] }}
                           </CTag>
                       </template>
                       <template v-if="filterDirtySelectedDataByCondition.length && !multiple">
@@ -192,6 +192,7 @@
     },
     data() {
       return {
+        keyVal: 1,
         isModalShow: false,
         dirtySelectedData: [],
         markDownListData: [],
@@ -254,10 +255,13 @@
         immediate: true
       },
       dirtySelectedData: {
-        handler() {
+        handler(v) {
           const pureSelectedValue = removeDirtyKey(this.dirtySelectedData.filter(item => !item[this.conditionProps]), treeDirtyKeys);
           this.$emit('input', pureSelectedValue);
-          this.$set(this, 'markDownListData', this.markDownListData);
+          const markDownListData = markListDataIdentify(_.cloneDeep(this.listData));
+          const {reflectKey, multiple} = this;
+          syncTreeListData(this, markDownListData, markDownListData, _.cloneDeep(v), reflectKey['value'], multiple);
+          this.$set(this, 'markDownListData', markDownListData);
         },
         deep: true,
       },
