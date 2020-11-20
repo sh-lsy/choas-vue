@@ -285,10 +285,17 @@ export const treeSelectListChangeHandle=(context, itemData)=> {
         context.$set(itemDataInTree, 'halfChecked', false);
       }
       const itemDataInTree = _.get(context.markDownListData,itemData._c_tree_self_id.split('-').join('.children.'),{});
-      context.$set(itemDataInTree, 'checked', true);
-      context.$set(itemDataInTree, 'halfChecked', false);
-      context.$set(context, 'markDownListData', context.markDownListData);
-      context.$set(context, 'dirtySelectedData', [itemDataInTree]);
+      if (itemDataInTree._c_tree_self_id) {
+        context.$set(itemDataInTree, 'checked', true);
+        context.$set(itemDataInTree, 'halfChecked', false);
+        context.$set(context, 'markDownListData', context.markDownListData);
+        context.$set(context, 'dirtySelectedData', [itemDataInTree]);
+      } else {
+        context.$set(itemData, 'checked', true);
+        context.$set(itemData, 'halfChecked', false);
+        context.$set(context, 'markDownListData', context.markDownListData);
+        context.$set(context, 'dirtySelectedData', [itemData]);
+      }
     }
   } else {
     const itemDataInTree = _.get(context.markDownListData,itemData._c_tree_self_id.split('-').join('.children.'),{});

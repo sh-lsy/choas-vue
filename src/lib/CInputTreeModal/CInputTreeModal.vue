@@ -196,6 +196,7 @@
         isModalShow: false,
         dirtySelectedData: [],
         markDownListData: [],
+        orginData:[]
       }
     },
     computed: {
@@ -228,6 +229,9 @@
       listData: {
         handler(v) {
           // 标记数据
+          if (v.length) {
+            this.orginData = v
+          }
           const markDownListData = markListDataIdentify(_.cloneDeep(v));
           const {multiple, reflectKey, value} = this;
           syncTreeListData(this, markDownListData, markDownListData, _.cloneDeep(value), reflectKey['value'], multiple);
@@ -258,7 +262,7 @@
         handler(v) {
           const pureSelectedValue = removeDirtyKey(this.dirtySelectedData.filter(item => !item[this.conditionProps]), treeDirtyKeys);
           this.$emit('input', pureSelectedValue);
-          const markDownListData = markListDataIdentify(_.cloneDeep(this.listData));
+          const markDownListData = markListDataIdentify(_.cloneDeep(this.orginData));
           const {reflectKey, multiple} = this;
           syncTreeListData(this, markDownListData, markDownListData, _.cloneDeep(v), reflectKey['value'], multiple);
           this.$set(this, 'markDownListData', markDownListData);
