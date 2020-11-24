@@ -74,8 +74,8 @@
     </div>
     <slot slot="footer">
       <div class="modal-footer">
-        <CButton type="danger" @click="cancelHandle">取&nbsp;&nbsp;消</CButton>
         <CButton @click="confirmHandle">确&nbsp;&nbsp;认</CButton>
+        <CButton type="danger" @click="cancelHandle">取&nbsp;&nbsp;消</CButton>
       </div>
     </slot>
   </CModal>
